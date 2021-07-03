@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h3>クイズアプリ</h3>
+    <div>私の趣味は何でしょう</div>
+    <button id="syougi-button">ジグソーパズル</button>
+    <button id="igo-button">プラモデル作成</button>
+
+    <script>
+      const sougibutton = document.getElementById("syougi-button")
+      const igobutton = document.getElementById("igo-button")
+
+      sougibutton.onclick = function() {
+        console.log("残念！不正解です")
+      }
+
+      igobutton.onclick = function() {
+        console.log("正解です！！")
+      }
+
+      let text = ""
+
+      if (text) {
+        console.log("true")
+      } else {
+        console.log("false")
+      }
+
+      //関数
+      const f = function(x) {
+        return x + 10
+      }
+      y = f(100)
+      console.log(y)
+
+      //配列は[]
+      let array = ["rina", "haruna", "mariko"]
+      console.log(array[1])
+
+      //オブジェクト
+      const rina = {
+        name: "りな",
+        nickname: "ちき",
+        university: "早稲田",
+        age: 21,
+        hobby: ["アニメ", "将棋", "プラモデル"],
+        family: {
+          father: "健彦",
+          mother: "真理子",
+          sister: "春菜",
+        },
+        birthplace: "埼玉",
+        isMenter: false,
+        sayHello: function() {
+          alert("こんにちは${this.name}です！！")
+        },
+      }
+
+      const FizzBuzz = function(number) {
+        for (let n = 1; n <= number; n++) {
+          if (n % 15 === 0) {
+            console.log("FizzBuzz")
+          } else if (n % 3 === 0) {
+            console.log("Fizz")
+          } else if (n % 5 === 0) {
+            console.log("buzz")
+          } else {
+            console.log(n)
+          }
+        }
+      }
+      FizzBuzz(30)
+      // && <条件をどちらも満たす
+      // || <最低どちらかは満たす
+    </script>
+  </body>
+</html>
