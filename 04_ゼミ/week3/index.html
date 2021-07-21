@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>自販機</title>
+  </head>
+  <body>
+    <h1>自販機</h1>
+
+    <section>
+      <h3>自販機にお金を入れる</h3>
+      <button id="add-button-100">
+        100円入れる
+      </button>
+      <h4>↓財布↓</h4>
+      <div id="display-saifu">1000</div>
+      <h4>↓投入金額↓</h4>
+      <div id="display-jihanki-money">0</div>
+    </section>
+
+    <section>
+      <h3>商品を買う</h3>
+      <button id="buy-button-tea">お茶(100円)</button>
+    </section>
+    <section>
+      <h3>買った商品</h3>
+      <div id="display-items"></div>
+    </section>
+    <section>
+      <h3>お釣り</h3>
+      <button id="button-otsuri">お釣り</button>
+    </section>
+
+    <script>
+      // HTML要素を取得する
+      const buyButtonTea = document.getElementById("buy-button-tea")
+      const displayItems = document.getElementById("display-items")
+      const addButton = document.getElementById("add-button-100")
+      const displaysaifu = document.getElementById("display-saifu")
+      const displayJihankiMoney = document.getElementById(
+        "display-jihanki-money",
+      )
+      const otsuriButton = document.getElementById("button-otsuri")
+      // 要素を取得するコード
+
+      // 2-1. 投入金額を表す変数を変数名jihankiMoney で用意しましょう。最初に0を代入してください。
+      let jihankiMoney = 0
+      // 2-2. 財布の状態を表す変数を変数名saifu で用意しましょう。最初に1000 を代入してください。
+      let saifu = 1000
+
+      // buyButtonTea を押した時の処理
+      buyButtonTea.onclick = function() {
+        if (jihankiMoney >= 100) {
+          displayItems.textContent += "🍵"
+          jihankiMoney -= 100
+          displayJihankiMoney.textContent = jihankiMoney
+        }
+      }
+
+      addButton.onclick = function() {
+        if (saifu >= 100) {
+          saifu -= 100 // saifu = saifu - 100;
+          jihankiMoney += 100
+          console.log("saifu " + saifu)
+          console.log("jihankiMoney " + jihankiMoney)
+          displaysaifu.textContent = saifu
+          displayJihankiMoney.textContent = jihankiMoney
+        }
+      }
+
+      otsuriButton.onclick = function() {
+        saifu += jihankiMoney
+        jihankiMoney = 0
+        displaysaifu.textContent = saifu
+        displayJihankiMoney.textContent = jihankiMoney
+      }
+    </script>
+  </body>
+</html>
