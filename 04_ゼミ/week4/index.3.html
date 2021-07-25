@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue自動販売機</title>
+  </head>
+  <body>
+    <h1>自動販売機</h1>
+
+    <!-- 1. 飲み物の名前と値段を表示する -->
+    <section id="app1">
+      <h3>飲み物の名前と値段を表示する</h3>
+
+      <div>
+        <div>{{ drinkName }}</div>
+        <button>{{drinkPrice}}</button>
+      </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+      new Vue({
+        el: "#app1",
+        data: {
+          drinkName: "お茶", //名前
+          drinkPrice: 120, //値段
+        },
+      })
+    </script>
+
+    <!-- 2. 飲み物を買えるようにする (v-onについて) -->
+    <section id="app2">
+      <h3>飲み物を買えるようにする</h3>
+
+      <div>
+        <div>{{ drink.name }}</div>
+        <button v-on:click="kau">{{ drink.price }}円</button>
+        <div>{{kattaKazu}}本買いました</div>
+      </div>
+    </section>
+
+    <script>
+      new Vue({
+        el: "#app2",
+        data: {
+          drink: {
+            name: "お茶", // 名前
+            price: 120, // 値段
+          },
+
+          kattaKazu: 0,
+        },
+        methods: {
+          kau: function() {
+            this.kattaKazu += 1
+          },
+        },
+      })
+    </script>
+
+    <!-- 3. 売り切れ状態を表示する１ (v-if v-elseについて) -->
+    <section id="app3">
+      <h3>売り切れ状態を表示する１</h3>
+
+      <div>
+        <div>{{ drink.name }} ({{drink.stock}})</div>
+        <button v-on:click="kau">{{ drink.price }}円</button>
+        <div>{{ kattaKazu }}本買いました</div>
+        <div v-if="drink.stock > 0">在庫あり</div>
+        <div v-else>売り切れ</div>
+      </div>
+    </section>
+
+    <script>
+      new Vue({
+        el: "#app3",
+        data: {
+          drink: {
+            name: "お茶", // 名前
+            price: 120, // 値段
+            stock: 3, //在庫数
+          },
+          kattaKazu: 0,
+        },
+        methods: {
+          kau: function() {
+            if (this.drink.stock > 0) {
+              this.drink.stock -= 1
+              this.kattaKazu += 1
+            }
+          },
+        },
+      })
+    </script>
+
+    <!-- 4. 売り切れ状態を表示する２ (v-bindについて) -->
+    <section id="app4">
+      <h3>売り切れ状態を表示する２</h3>
+
+      <div>
+        <div>{{ drink.name }}（{{ drink.stock }}）</div>
+        <button v-on:click="kau" v-bind:disabled="drink.stock === 0">
+          {{ drink.price }}円
+        </button>
+        <div>{{ kattaKazu }}本買いました</div>
+      </div>
+    </section>
+
+    <script>
+      new Vue({
+        el: "#app4",
+        data: {
+          drink: {
+            name: "お茶",
+            price: 120,
+            stock: 3,
+          },
+          kattaKazu: 0,
+        },
+        methods: {
+          kau: function() {
+            if (this.drink.stock > 0) {
+              this.drink.stock -= 1
+              this.kattaKazu += 1
+            }
+          },
+        },
+      })
+    </script>
+
+    <!-- 5. 複数の飲み物を表示する (v-forについて) -->
+    <section id="app5">
+      <h3>複数の飲み物を表示する</h3>
+
+      <div>
+        <div>
+          <div v-for="drink in drinks">
+            <div>{{ drink.name }}（{{ drink.stock }}）</div>
+            <button v-on:click="kau(drink)" v-bind:disabled="drink.stock === 0">
+              {{ drink.price }}円
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      new Vue({
+        el: "#app5",
+        data: {
+          drinks: [
+            {
+              name: "お茶",
+              price: 120,
+              stock: 3,
+            },
+            {
+              name: "水",
+              price: 200,
+              stock: 3,
+            },
+          ],
+        },
+        methods: {
+          kau: function(drink) {
+            alert(drink.name + "を買いました。")
+          },
+        },
+      })
+    </script>
+  </body>
+</html>
+
+<!-- === このメッセージは消しても構いません === -->
+
+<!-- ✅ 👈のメニューから一番下の「👬」のアイコンを選んで -->
+<!--    Live Modeを「Everyone cab edit」に変更した後、 -->
+<!--    「You're live!」の下、「Stop Session」の上、にあるリンクをShareしましょう -->
+<!-- ✅ CodeSandBoxはVS Codeとほぼ同じ様に扱えます。 -->
+<!-- ✅ 👉にある画面が実行画面です。 -->
+<!-- ✅ 👉の👇にある「Console」が実行時のConsoleになります。 -->
+<!--    たまに挙動がおかしい時があるので気をつけましょう。 -->
+
+<!-- =============================== -->
